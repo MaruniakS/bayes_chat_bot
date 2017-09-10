@@ -1,0 +1,1 @@
+require 'bayes_classifier'
