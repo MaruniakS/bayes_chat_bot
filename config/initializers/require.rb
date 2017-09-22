@@ -1,1 +1,1 @@
-require 'bayes_classifier'
+require 'lingua/stemmer'

@@ -1,0 +1,1 @@
+class ApplicationClassifier; end

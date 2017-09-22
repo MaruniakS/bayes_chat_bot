@@ -1,7 +1,13 @@
 class HomeController < ApplicationController
   def index
-    sentence = 'how is your installation'.split(' ')
-    @stems = Lingua.stemmer(sentence)
-    render json: @stems.as_json
+    NaiveBayesClassifier.prepare_data
+    sentence = 'Hello, goodbye. See you'
+    render json: NaiveBayesClassifier.classify(sentence)
+  end
+
+  private
+
+  def normalize_sentence(sentence)
+    sentence.downcase.gsub(/[^a-z\s]/i, '')
   end
 end
