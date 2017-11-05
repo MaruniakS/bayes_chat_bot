@@ -1,11 +1,19 @@
 class HomeController < ApplicationController
   def index
     NaiveBayesClassifier.prepare_data
-    sentence = 'Hello, goodbye. See you'
+    sentence = 'goodbye. See you tomorrow. Have a good day'
     render json: NaiveBayesClassifier.classify(sentence)
   end
 
+  # def response
+  #   @sentence = normalize_sentence(sentence_params[:sentence])
+  #   render json: NaiveBayesClassifier.classify(@sentence)
+  # end
+
   private
+  # def sentence_params
+  #   params.require(:training_data).permit(:sentence)
+  # end
 
   def normalize_sentence(sentence)
     sentence.downcase.gsub(/[^a-z\s]/i, '')

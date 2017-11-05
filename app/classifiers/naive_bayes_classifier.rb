@@ -1,22 +1,31 @@
 class NaiveBayesClassifier
   TRAINING_DATA = [
       { klass: 'greeting', sentence: 'how are you?' },
+      { klass: 'greeting', sentence: 'can we talk tomorrow?' },
       { klass: 'greeting', sentence: 'Hello, are you bot?' },
+      { klass: 'greeting', sentence: 'can we see each other today?' },
       { klass: 'greeting', sentence: 'Hi, are you a human?' },
       { klass: 'greeting', sentence: 'how is your day?' },
       { klass: 'greeting', sentence: 'Good morning, can you help me?' },
       { klass: 'greeting', sentence: 'good day' },
       { klass: 'greeting', sentence: 'how is it going today?' },
-      { klass: 'goodbye', sentence: 'have a nice day' },
+      { klass: 'goodbye', sentence: 'have a nice evening' },
       { klass: 'goodbye', sentence: 'bye' },
-      { klass: 'goodbye', sentence: 'goodbye' },
+      { klass: 'goodbye', sentence: 'goodbye, have a good night' },
       { klass: 'goodbye', sentence: 'see you soon' },
       { klass: 'goodbye', sentence: 'see you later' },
       { klass: 'goodbye', sentence: 'talk to you soon' },
       { klass: 'help', sentence: 'can you help me' },
       { klass: 'help', sentence: 'I need advice on' },
       { klass: 'help', sentence: 'how can i do this' },
-      { klass: 'help', sentence: 'what should I do' }
+      { klass: 'help', sentence: 'what should I do' },
+      { klass: 'help', sentence: 'see you need advise' },
+      { klass: 'weather', sentence: 'what is the weather like today' },
+      { klass: 'weather', sentence: 'is it raining' },
+      { klass: 'weather', sentence: 'will it be sunny tomorrow' },
+      { klass: 'weather', sentence: 'it is cold outside' },
+      { klass: 'weather', sentence: 'better sit home tomorrow' },
+      { klass: 'weather', sentence: 'seems like it is raining' }
   ]
 
   CORPUS_WORDS = {}
@@ -50,13 +59,18 @@ class NaiveBayesClassifier
       classes = CLASS_WORDS.map { |k, _| k }
       max_score = 0
       klass = ''
+      puts "\n" * 10
+      puts "class\t\t\tscore"
+      puts '-' * 30
       classes.each do |c|
         score = classify_per_class(words, c)
+        puts "#{(c + ((' ' * (10-c.length))))}\t\t#{score}"
         if score > max_score
           max_score = score
           klass = c
         end
       end
+      puts "\n" * 10
       klass || 'Not classified'
     end
 
@@ -64,7 +78,10 @@ class NaiveBayesClassifier
       score = 0
       words.each do |w|
         word = Lingua.stemmer(w)
-        score += 1 if CLASS_WORDS[klass].include? word
+        if CLASS_WORDS[klass].include? word
+          # score += (1.0 / CORPUS_WORDS[word])
+          score += 1
+        end
       end
       score
     end
