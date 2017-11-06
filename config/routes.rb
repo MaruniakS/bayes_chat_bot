@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'home#index'
+  telegram_webhooks TelegramWebhooksController
 
   # для URL '/api/...'
   # scope 'api' do
