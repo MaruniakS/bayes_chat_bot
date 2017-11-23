@@ -1,31 +1,41 @@
 class NaiveBayesClassifier
   TRAINING_DATA = [
-      { klass: 'greeting', sentence: 'how are you?' },
-      { klass: 'greeting', sentence: 'can we talk tomorrow?' },
-      { klass: 'greeting', sentence: 'Hello, are you bot?' },
-      { klass: 'greeting', sentence: 'can we see each other today?' },
-      { klass: 'greeting', sentence: 'Hi, are you a human?' },
-      { klass: 'greeting', sentence: 'how is your day?' },
-      { klass: 'greeting', sentence: 'Good morning, can you help me?' },
-      { klass: 'greeting', sentence: 'good day' },
-      { klass: 'greeting', sentence: 'how is it going today?' },
-      { klass: 'goodbye', sentence: 'have a nice evening' },
+      { klass: 'greeting', sentence: 'Hi, how are you?' },
+      { klass: 'greeting', sentence: 'Hello' },
+      { klass: 'greeting', sentence: 'what\'s up?' },
+      { klass: 'greeting', sentence: 'good morning / day / afternoon' },
+      { klass: 'greeting', sentence: 'how is it going' },
+
+      { klass: 'about', sentence: 'are you human or bot' },
+      { klass: 'about', sentence: 'what can you do' },
+      { klass: 'about', sentence: 'what is your name / purpose' },
+      { klass: 'about', sentence: 'tell something about yourself' },
+
+      { klass: 'goodbye', sentence: 'have a nice evening / day' },
       { klass: 'goodbye', sentence: 'bye' },
       { klass: 'goodbye', sentence: 'goodbye, have a good night' },
       { klass: 'goodbye', sentence: 'see you soon' },
       { klass: 'goodbye', sentence: 'see you later' },
       { klass: 'goodbye', sentence: 'talk to you soon' },
+      { klass: 'goodbye', sentence: 'looking forward to hearing from you' },
+
       { klass: 'help', sentence: 'can you help me' },
       { klass: 'help', sentence: 'I need advice on' },
       { klass: 'help', sentence: 'how can i do this' },
       { klass: 'help', sentence: 'what should I do' },
-      { klass: 'help', sentence: 'see you need advise' },
-      { klass: 'weather', sentence: 'what is the weather like today' },
-      { klass: 'weather', sentence: 'is it raining' },
-      { klass: 'weather', sentence: 'will it be sunny tomorrow' },
-      { klass: 'weather', sentence: 'it is cold outside' },
-      { klass: 'weather', sentence: 'better sit home tomorrow' },
-      { klass: 'weather', sentence: 'seems like it is raining' }
+
+
+      { klass: 'apply_job', sentence: 'want to get this position' },
+      { klass: 'apply_job', sentence: 'apply for' },
+      { klass: 'apply_job', sentence: 'become a developer' },
+      { klass: 'apply_job', sentence: 'is this vacancy free' },
+      { klass: 'apply_job', sentence: 'send you my cv' },
+      { klass: 'apply_job', sentence: 'What need to apply for this job?' },
+
+      { klass: 'apply_project', sentence: 'I would like to schedule a call to discuss a project' },
+      { klass: 'apply_project', sentence: 'I want to develop my idea for my new startup' },
+      { klass: 'apply_project', sentence: 'interested to use your mobile development service' }
+
   ]
 
   CORPUS_WORDS = {}
