@@ -74,7 +74,7 @@ class NaiveBayesClassifier
       puts '-' * 30
       classes.each do |c|
         score = classify_per_class(words, c)
-        puts "#{(c + ((' ' * (10-c.length))))}\t\t#{score}"
+        puts "#{(c + ((' ' * (20-c.length))))}\t\t#{score}"
         if score > max_score
           max_score = score
           klass = c
@@ -89,8 +89,8 @@ class NaiveBayesClassifier
       words.each do |w|
         word = Lingua.stemmer(w)
         if CLASS_WORDS[klass].include? word
-          # score += (1.0 / CORPUS_WORDS[word])
-          score += 1
+          score += (1.0 / CORPUS_WORDS[word])
+          #score += 1
         end
       end
       score
