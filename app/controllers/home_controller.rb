@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   def index
     NaiveBayesClassifier.prepare_data
-    sentence = 'hello, i want to become developer'
+    #sentence = 'hello, i want to become developer'
+    sentence = 'Hi'
     render json: NaiveBayesClassifier.classify(sentence)
   end
 

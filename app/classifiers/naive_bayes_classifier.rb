@@ -12,7 +12,7 @@ class NaiveBayesClassifier
       { klass: 'about', sentence: 'tell something about yourself' },
 
       { klass: 'goodbye', sentence: 'have a nice evening / day' },
-      { klass: 'goodbye', sentence: 'bye' },
+      { klass: 'goodbye', sentence: 'thanks, bye' },
       { klass: 'goodbye', sentence: 'goodbye, have a good night' },
       { klass: 'goodbye', sentence: 'see you soon' },
       { klass: 'goodbye', sentence: 'see you later' },
@@ -23,6 +23,7 @@ class NaiveBayesClassifier
       { klass: 'help', sentence: 'I need advice on' },
       { klass: 'help', sentence: 'how can i do this' },
       { klass: 'help', sentence: 'what should I do' },
+      { klass: 'help', sentence: 'I have a problem with management' },
 
 
       { klass: 'apply_job', sentence: 'want to get this position' },
@@ -35,8 +36,23 @@ class NaiveBayesClassifier
       { klass: 'apply_project', sentence: 'I would like to schedule a call to discuss a project' },
       { klass: 'apply_project', sentence: 'I want to develop my idea for my new startup' },
       { klass: 'apply_project', sentence: 'interested to use your mobile development service' }
-
   ]
+
+  # ANSWERS = {
+  #     'greeting': 'Hello, how can I help you?',
+  #     'about': 'I\'m bot based on Naive Bayes classifier',
+  #     'help': 'What can I do for you',
+  #     'apply_job': 'Please, contact our HR managers via this email careers@company.com',
+  #     'goodbye': 'Goodbye'
+  # }
+
+  ANSWERS = {
+      'greeting': 'Hi, can I be useful for you?',
+      'about': 'I can classify your problem and direct you to the right person.',
+      'help': 'How can I help you?',
+      'apply_project': 'Ok, we got your email and phone number. Our Sales Manager will contact you.',
+      'goodbye': 'Have a good day!'
+  }
 
   CORPUS_WORDS = {}
   CLASS_WORDS = {}
@@ -65,6 +81,7 @@ class NaiveBayesClassifier
     end
 
     def classify(sentence)
+      puts CLASS_WORDS.to_json
       words = normalize_sentence(sentence).split(' ')
       classes = CLASS_WORDS.map { |k, _| k }
       max_score = 0
@@ -81,7 +98,7 @@ class NaiveBayesClassifier
         end
       end
       puts "\n" * 10
-      klass || 'Not classified'
+      (klass && ANSWERS[klass.to_sym]) || 'Sorry, I didn\'t understand you.'
     end
 
     def classify_per_class(words, klass)

@@ -61,17 +61,8 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def message(message)
-    messages = {
-        "Hello" => 'Hi, can I help you?',
-        "Are you bot or human" => "I'm a chatbot based on Naive Bayes Classifier",
-        "Do you enjoy raining days?"=> 'I prefer sunny weather',
-        "Hi" => 'Hello!',
-        "Goodbye" => 'See you soon',
-        "Who is the best girl?" => 'Do you know Liliya Artym?'
-    }
-    puts message['text']
-    puts messages[message['text']]
-    answer = messages[message['text']] || 'Sorry, can\'t understand you'
+    NaiveBayesClassifier.prepare_data
+    answer = NaiveBayesClassifier.classify(message['text'])
     respond_with :message, text: (answer)
   end
 
