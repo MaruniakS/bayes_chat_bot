@@ -38,21 +38,21 @@ class NaiveBayesClassifier
       { klass: 'apply_project', sentence: 'interested to use your mobile development service' }
   ]
 
-  # ANSWERS = {
-  #     'greeting': 'Hello, how can I help you?',
-  #     'about': 'I\'m bot based on Naive Bayes classifier',
-  #     'help': 'What can I do for you',
-  #     'apply_job': 'Please, contact our HR managers via this email careers@company.com',
-  #     'goodbye': 'Goodbye'
-  # }
-
   ANSWERS = {
-      'greeting': 'Hi, can I be useful for you?',
-      'about': 'I can classify your problem and direct you to the right person.',
-      'help': 'How can I help you?',
-      'apply_project': 'Ok, we got your email and phone number. Our Sales Manager will contact you.',
-      'goodbye': 'Have a good day!'
+      'greeting': 'Hello, how can I help you?',
+      'about': 'I\'m bot based on Naive Bayes classifier',
+      'help': 'What can I do for you',
+      'apply_job': 'Please, contact our HR managers via this email careers@company.com',
+      'goodbye': 'Goodbye'
   }
+
+  # ANSWERS = {
+  #     'greeting': 'Hi, can I be useful for you?',
+  #     'about': 'I can classify your problem and direct you to the right person.',
+  #     'help': 'How can I help you?',
+  #     'apply_project': 'Ok, we got your email and phone number. Our Sales Manager will contact you.',
+  #     'goodbye': 'Have a good day!'
+  # }
 
   CORPUS_WORDS = {}
   CLASS_WORDS = {}
@@ -81,14 +81,13 @@ class NaiveBayesClassifier
     end
 
     def classify(sentence)
-      puts CLASS_WORDS.to_json
       words = normalize_sentence(sentence).split(' ')
       classes = CLASS_WORDS.map { |k, _| k }
       max_score = 0
       klass = ''
       puts "\n" * 10
-      puts "class\t\t\tscore"
-      puts '-' * 30
+      puts "class\t\t\t\tscore"
+      puts '-' * 40
       classes.each do |c|
         score = classify_per_class(words, c)
         puts "#{(c + ((' ' * (20-c.length))))}\t\t#{score}"
@@ -98,6 +97,7 @@ class NaiveBayesClassifier
         end
       end
       puts "\n" * 10
+      puts klass
       (klass && ANSWERS[klass.to_sym]) || 'Sorry, I didn\'t understand you.'
     end
 
@@ -107,7 +107,7 @@ class NaiveBayesClassifier
         word = Lingua.stemmer(w)
         if CLASS_WORDS[klass].include? word
           score += (1.0 / CORPUS_WORDS[word])
-          #score += 1
+          # score += 1
         end
       end
       score
